@@ -63,6 +63,7 @@ a {
 }
 
 /* class */
+
 .famille {
     padding: 0.5rem;
     background-color: var(--DefaultNegLight);
@@ -73,6 +74,15 @@ a {
 }
 
 .block {
+    margin: 2rem;
+    padding: 1rem;
+    display: flex;
+    background-color: var(--DefaultLight);
+    border: 0.2rem solid var(--Default);
+    border-radius: 1rem;
+}
+
+.main-block {
     margin: 2rem;
     padding: 1rem;
     display: flex;
@@ -124,4 +134,8 @@ a {
     width: 19rem;
     outline: none;
     font-size: 1rem;
+}
+
+.block.Hide {
+    display: none;
 }
