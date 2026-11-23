@@ -5,6 +5,8 @@ const BlocsListe = document.querySelectorAll(".block");
 const BtnLogin = document.getElementById("BtnLogIn");
 const LoginText = document.getElementById("LogInText");
 
+const BtnLogout = document.getElementById("LogOut");
+
 const LogObjectListe = document.querySelectorAll(".Loged");
 const UnlogObjectListe = document.querySelectorAll(".Unloged");
 
@@ -59,6 +61,23 @@ if (BtnLogin && LoginText) {
 
         FindAccount(saisi);
     })
+
+    LogInText.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            BtnLogin.click();
+        }
+    });
+}
+
+//Fonction du Logout
+if (BtnLogout) {
+    BtnLogout.addEventListener("click", () => {
+        UserName = "";
+        FamilyName = "";
+        localStorage.removeItem(SessionKey);
+
+        window.location.replace("LogScreen.html");
+    })
 }
 
 //Trouver la Session
@@ -77,7 +96,7 @@ function FindActualSession() {
     }
 }
 
-//Fonstion LogIn
+//Fonction LogIn
 async function FindAccount(UserTry) {
     try {
         const Respond = await fetch(`${URLDataBase}?Page=AccountList`)
@@ -90,7 +109,7 @@ async function FindAccount(UserTry) {
                     Nom: UserTry
                 };
                 localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
-                window.location.href = "Index.html";
+                window.location.replace("Index.html");
                 return;
             };
         }
@@ -100,6 +119,32 @@ async function FindAccount(UserTry) {
 
     } catch {
         return null;
+    }
+}
+
+//Fonction SignIn
+async function NewAccount(UserNew) {
+    try {
+        const Send = await fetch(URLDataBase, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify({
+                action: "SignIn",
+                Nom: UserNew
+            })
+        })
+
+        const Data = await Send.json();
+
+        const LocalChange = {
+            Nom: UserNew
+        };
+        localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
+        window.location.replace("Index.html");
+    } catch {
+        return;
     }
 }
 

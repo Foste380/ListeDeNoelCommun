@@ -129,14 +129,6 @@ a {
     height: 1.3rem;
 }
 
-/* id */
-#Search {
-    border: 0;
-    width: 19rem;
-    outline: none;
-    font-size: 1rem;
-}
-
 .Hide {
     display: none !important;
 }
@@ -153,6 +145,10 @@ a {
     place-items: center;
 }
 
+.Part .block {
+    justify-content: center;
+}
+
 .Part:first-child {
     margin-bottom: 1rem;
     border-bottom: 0.1rem solid grey;
@@ -163,6 +159,23 @@ a {
     border-radius: 1rem;
     padding: 0.3rem;
     width: 15rem;
+    outline: none;
+    font-size: 1rem;
+}
+
+.Debug {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 99;
+    border-color: var(--DefaultNeg);
+    background-color: var(--DefaultNegLight);
+}
+
+/* id */
+#Search {
+    border: 0;
+    width: 19rem;
     outline: none;
     font-size: 1rem;
 }
