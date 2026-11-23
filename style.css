@@ -34,6 +34,7 @@ body {
     padding: 0;
     margin: 0;
     color: black;
+    background-color: white;
 }
 
 header {
@@ -105,7 +106,22 @@ a {
     padding-right: 5px;
 }
 
+.search_bar {
+    display: flex;
+    width: 20rem;
+    justify-self: center;
+    border-bottom: 0.1rem solid grey;
+}
 
-.rech-bar {
-    text-align: center;
+.search_bar img {
+    object-fit: cover;
+    height: 1.3rem;
+}
+
+/* id */
+#Search {
+    border: 0;
+    width: 19rem;
+    outline: none;
+    font-size: 1rem;
 }
