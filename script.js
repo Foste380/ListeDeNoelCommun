@@ -1,4 +1,6 @@
 //setup
+const Title = document.getElementById("Title");
+
 const SearchElement = document.getElementById("Search");
 const BlocsListe = document.querySelectorAll(".block");
 
@@ -36,6 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     UnlogObjectListe.forEach((bloc) => {
         bloc.classList.toggle("Hide", IsLog);
     })
+
+    if (Title) {
+        if (IsLog) {
+            Title.textContent = UserName.toUpperCase();
+        }
+        else {
+            Title.textContent = "BIENVENUE"
+        }
+    }
 })
 
 //Fonctionnement bar de recherche
