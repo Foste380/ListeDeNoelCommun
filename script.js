@@ -5,12 +5,15 @@ const BlocsListe = document.querySelectorAll(".block");
 const BtnLogin = document.getElementById("BtnLogIn");
 const LoginText = document.getElementById("LogInText");
 
+const BtnSignin = document.getElementById("BtnSignIn");
+const SigninText = document.getElementById("SignInText");
+
 const BtnLogout = document.getElementById("LogOut");
 
 const LogObjectListe = document.querySelectorAll(".Loged");
 const UnlogObjectListe = document.querySelectorAll(".Unloged");
 
-const URLDataBase = "https://script.google.com/macros/s/AKfycbxGsb3fJU-0y59mcavJB3gKq_9aLSW9f0RsgBxgKEnZkZie4k1SChpa4O0vcukp-R5bLA/exec";
+const URLDataBase = "https://script.google.com/macros/s/AKfycbyf_bjwZXkXK-io8uWTY01pHf4m3ZALbwzOq-2IT9_WNW9lK69_weIOuO28Iy7VgMbNjQ/exec";
 const SessionKey = "SessionCadeauListe"
 
 var UserName;
@@ -62,9 +65,29 @@ if (BtnLogin && LoginText) {
         FindAccount(saisi);
     })
 
-    LogInText.addEventListener("keydown", (e) => {
+    LoginText.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             BtnLogin.click();
+        }
+    });
+}
+
+//Fontionnement du SignIn html
+if (SigninText && BtnSignin) {
+    BtnSignin.addEventListener("click", () => {
+        const saisi = SigninText.value.trim();
+
+        if (saisi === "") {
+            alert("il faut remplir le champ au dessus");
+            return;
+        }
+
+        NewAccount(saisi);
+    })
+
+    SigninText.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            BtnSignin.click();
         }
     });
 }
@@ -131,19 +154,38 @@ async function NewAccount(UserNew) {
                 "Content-Type": "text/plain;charset=utf-8"
             },
             body: JSON.stringify({
-                action: "SignIn",
+                Action: "Signin",
                 Nom: UserNew
             })
         })
 
-        const Data = await Send.json();
+        const reponseTexte = await Send.text();
+        console.log("Réponse brute du serveur :", reponseTexte);
+
+        let Data;
+        try {
+            Data = JSON.parse(reponseTexte);
+        } catch (err) {
+            alert("Le serveur n'a pas renvoyé de JSON, mais ce texte :\n\n" + reponseTexte);
+            return;
+        }
+
+        if (!Data.success) {
+            alert(Data.message || "Impossible de créer le compte.");
+            return;
+        }
 
         const LocalChange = {
             Nom: UserNew
         };
+
+        UserName = UserNew;
+
         localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
         window.location.replace("Index.html");
-    } catch {
+
+    } catch (error) {
+        alert(error.toString());
         return;
     }
 }
