@@ -4,6 +4,7 @@
     --DefaultLight: lightgreen;
     --DefaultNegLight: rgb(240, 156, 156);
     --Assombri: RGBA(1, 1, 1, 0.2);
+    --persoBlue: #00b3ff;
 }
 
 /* Ecriture */
@@ -136,6 +137,32 @@ a {
     font-size: 1rem;
 }
 
-.block.Hide {
-    display: none;
+.Hide {
+    display: none !important;
+}
+
+.Unloged {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+}
+
+.LogInGrid {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+}
+
+.Part:first-child {
+    margin-bottom: 1rem;
+    border-bottom: 0.1rem solid grey;
+}
+
+.Part input {
+    border: 0.1rem solid rgb(0, 0, 0);
+    border-radius: 1rem;
+    padding: 0.3rem;
+    width: 15rem;
+    outline: none;
+    font-size: 1rem;
 }
