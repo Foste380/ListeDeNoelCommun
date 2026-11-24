@@ -54,6 +54,8 @@ Header div {
     border: 0.2rem solid var(--Default);
     border-radius: 1rem;
     margin: 1;
+    padding-bottom: 1rem;
+    z-index: 100;
 }
 
 a {
@@ -66,12 +68,26 @@ a {
 /* class */
 
 .famille {
-    padding: 0.5rem;
-    background-color: var(--DefaultNegLight);
-    border: 0.2rem solid var(--DefaultNeg);
-    border-radius: 1.5rem;
+    padding: 0.7rem;
+    background-color: lightgrey;
+    position: absolute;
+    border: 0.2rem solid grey;
+    border-radius: 2.5rem;
     font-size: 1.5rem;
+    width: fit-content;
+    justify-self: center;
+    z-index: 101;
+    top: 3.8rem;
+    transform: translateY(-5);
+}
 
+.SousFamille {
+    display: none;
+    background-color: var(--DefaultLight);
+    border: 0.2rem solid var(--Default);
+    border-radius: 1.5rem;
+    justify-content: center;
+    margin: 0.5rem;
 }
 
 .block {

@@ -1,5 +1,6 @@
 //setup
 const Title = document.getElementById("Title");
+const Family = document.getElementById("Family");
 
 const SearchElement = document.getElementById("Search");
 const BlocsListe = document.querySelectorAll(".block");
@@ -20,6 +21,7 @@ const SessionKey = "SessionCadeauListe"
 
 var UserName;
 var FamilyName;
+var FamilySelected = true;
 
 //OnLoad
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const IsLog = !(UserName == null || UserName == "");
+    const FamSet = !(FamilyName == null || FamilyName == "");
 
     LogObjectListe.forEach((bloc) => {
         bloc.classList.toggle("Hide", !IsLog);
@@ -45,6 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
             Title.textContent = "BIENVENUE"
+        }
+    }
+
+    if (Family && !FamilySelected) {
+        if (FamSet) {
+            Family.textContent = Family;
+        }
+        else {
+            Family.textContent = "Selectionner une famille";
+            Family.style.backgroundColor = "lightgrey";
+            Family.style.borderColor = "grey"
         }
     }
 })
