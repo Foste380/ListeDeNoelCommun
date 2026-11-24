@@ -6,7 +6,7 @@ const SearchElement = document.getElementById("Search");
 const SearchBar = document.getElementById("SearchBar");
 
 const BlocsListe = document.querySelectorAll(".block");
-const UnFam = document.querySelectorAll(".SousFamille");
+var UnFam;
 
 const MaListe = document.getElementById("MaListe");
 
@@ -37,6 +37,7 @@ var FamilySelected = false;
 document.addEventListener("DOMContentLoaded", () => {
 
     const ActualSession = FindActualSession();
+
 
     if (ActualSession && ActualSession.Nom) {
         UserName = ActualSession.Nom;
@@ -267,29 +268,31 @@ async function FindMembre() {
     try {
         const respond = await fetch(`${URLDataBase}?Page=familleListe`);
         const Data = await respond.json();
-        const ListeMemberName = Data.find(f => f.nom == FamilyName).Membre;
+        const ListeMemberName = Data.find(f => f.Nom == FamilyName).Membre;
 
         if (ListeMemberName) {
             const MemberTable = ListeMemberName.split(",").map(Nom => Nom.trim());
 
             MemberTable.forEach((bloc) => {
-                const htmlMembre = `<a href="" class="block">
-                                    <div>
-                                        <h3>${bloc}</h3>
-                                            <div class="tags-liste">
-                                                <p class="tag">X idée</p>
-                                                <p class="tag">X restant</p>
+                if (bloc != UserName) {
+                    const htmlMembre = `<Section href="" class="block">
+                                            <div>
+                                                <h3>${bloc}</h3>
+                                                <div class="tags-liste">
+                                                    <p class="tag">X idée</p>
+                                                    <p class="tag">X restant</p>
+                                                </div>
                                             </div>
-                                    </div>
-                                </a>`
+                                        </Section>`
 
-                MemberListe.insertAdjacentHTML("beforeend", htmlMembre);
+                    MemberListe.insertAdjacentHTML("beforeend", htmlMembre);
+                }
+
             })
-
-
         }
 
     } catch {
+        alert(err.toString());
         return;
     }
 }
@@ -304,16 +307,40 @@ async function FindFamily() {
             const FamilleTable = ListeUserName.split(",").map(Nom => Nom.trim());
 
             FamilleTable.forEach((bloc) => {
-                const htmlFamille = `<a href="" class="SousFamille">
+                const htmlFamille = `<section class="SousFamille" style="cursor: pointer;">
                                         <h3>${bloc}</h3>
-                                    </a>`
+                                    </section>`
 
                 familleListe.insertAdjacentHTML("beforeend", htmlFamille);
             })
-
-            alert(`finish tabl lenght ${FamilleTable.length}`);
         }
 
+        UnFam = document.querySelectorAll(".SousFamille");
+
+        if (UnFam) {
+            UnFam.forEach((bloc) => {
+                bloc.addEventListener("click", () => {
+                    ChangeFamily(bloc);
+                })
+            })
+        }
+
+    } catch (err) {
+        alert(err.toString());
+        return;
+    }
+}
+
+async function ChangeFamily(Obj) {
+    try {
+        const Nouv = Obj.textContent.trim();
+
+        const LocalChange = {
+            Nom: UserName,
+            Fam: Nouv
+        };
+        localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
+        window.location.replace("index.html");
     } catch (err) {
         alert(err.toString());
         return;
