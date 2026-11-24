@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         bloc.classList.toggle("Hide", IsLog);
     })
 
+    //Adaptative Object
+    //Titles
     if (Title) {
         if (IsLog) {
             Title.textContent = UserName.toUpperCase();
@@ -50,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
             Title.textContent = "BIENVENUE"
         }
     }
-
     if (Family && !FamilySelected) {
         if (FamSet) {
             Family.textContent = Family;
@@ -157,7 +158,7 @@ async function FindAccount(UserTry) {
                     Nom: UserTry
                 };
                 localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
-                window.location.replace("Index.html");
+                window.location.replace("index.html");
                 return;
             };
         }
@@ -207,7 +208,7 @@ async function NewAccount(UserNew) {
         UserName = UserNew;
 
         localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
-        window.location.replace("Index.html");
+        window.location.replace("index.html");
 
     } catch (error) {
         alert(error.toString());
