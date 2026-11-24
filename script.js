@@ -21,7 +21,7 @@ const SessionKey = "SessionCadeauListe"
 
 var UserName;
 var FamilyName;
-var FamilySelected = true;
+var FamilySelected = false;
 
 //OnLoad
 document.addEventListener("DOMContentLoaded", () => {
