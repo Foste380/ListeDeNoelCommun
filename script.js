@@ -3,7 +3,17 @@ const Title = document.getElementById("Title");
 const Family = document.getElementById("Family");
 
 const SearchElement = document.getElementById("Search");
+const SearchBar = document.getElementById("SearchBar");
+
 const BlocsListe = document.querySelectorAll(".block");
+const UnFam = document.querySelectorAll(".SousFamille");
+
+const MaListe = document.getElementById("MaListe");
+
+const NoFamMess = document.getElementById("NoFamMess");
+
+const MemberListe = document.getElementById("MembreListe");
+const familleListe = document.getElementById("FamilyListe");
 
 const BtnLogin = document.getElementById("BtnLogIn");
 const LoginText = document.getElementById("LogInText");
@@ -32,6 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
         UserName = ActualSession.Nom;
     }
 
+    if (ActualSession && ActualSession.Fam) {
+        FamilyName = ActualSession.Fam;
+    }
+
     const IsLog = !(UserName == null || UserName == "");
     const FamSet = !(FamilyName == null || FamilyName == "");
 
@@ -47,22 +61,55 @@ document.addEventListener("DOMContentLoaded", () => {
     if (Title) {
         if (IsLog) {
             Title.textContent = UserName.toUpperCase();
+
+            FindFamily();
         }
         else {
             Title.textContent = "BIENVENUE"
         }
     }
-    if (Family && !FamilySelected) {
+    if (Family) {
         if (FamSet) {
-            Family.textContent = Family;
+            Family.textContent = FamilyName;
+            if (MaListe) {
+                MaListe.classList.toggle("Hide", false);
+            }
+            if (SearchBar) {
+                SearchBar.classList.toggle("Hide", false);
+            }
+            if (NoFamMess) {
+                NoFamMess.classList.toggle("Hide", true);
+            }
+
+            FindMembre();
         }
         else {
             Family.textContent = "Selectionner une famille";
             Family.style.backgroundColor = "lightgrey";
-            Family.style.borderColor = "grey"
+            Family.style.borderColor = "grey";
+            if (MaListe) {
+                MaListe.classList.toggle("Hide", true);
+            }
+            if (SearchBar) {
+                SearchBar.classList.toggle("Hide", true);
+            }
+            if (NoFamMess) {
+                NoFamMess.classList.toggle("Hide", false);
+            }
         }
+
     }
 })
+
+//Fonctionnement Family liste
+if (Family) {
+    Family.addEventListener("click", () => {
+        FamilySelected = !FamilySelected;
+
+        familleListe.classList.toggle("Hide", !FamilySelected);
+
+    })
+}
 
 //Fonctionnement bar de recherche
 if (SearchElement) {
@@ -216,3 +263,59 @@ async function NewAccount(UserNew) {
     }
 }
 
+async function FindMembre() {
+    try {
+        const respond = await fetch(`${URLDataBase}?Page=familleListe`);
+        const Data = await respond.json();
+        const ListeMemberName = Data.find(f => f.nom == FamilyName).Membre;
+
+        if (ListeMemberName) {
+            const MemberTable = ListeMemberName.split(",").map(Nom => Nom.trim());
+
+            MemberTable.forEach((bloc) => {
+                const htmlMembre = `<a href="" class="block">
+                                    <div>
+                                        <h3>${bloc}</h3>
+                                            <div class="tags-liste">
+                                                <p class="tag">X idée</p>
+                                                <p class="tag">X restant</p>
+                                            </div>
+                                    </div>
+                                </a>`
+
+                MemberListe.insertAdjacentHTML("beforeend", htmlMembre);
+            })
+
+
+        }
+
+    } catch {
+        return;
+    }
+}
+
+async function FindFamily() {
+    try {
+        const respond = await fetch(`${URLDataBase}?Page=AccountList`);
+        const Data = await respond.json();
+        const ListeUserName = Data.find(f => f.Nom == UserName).Familles;
+
+        if (ListeUserName) {
+            const FamilleTable = ListeUserName.split(",").map(Nom => Nom.trim());
+
+            FamilleTable.forEach((bloc) => {
+                const htmlFamille = `<a href="" class="SousFamille">
+                                        <h3>${bloc}</h3>
+                                    </a>`
+
+                familleListe.insertAdjacentHTML("beforeend", htmlFamille);
+            })
+
+            alert(`finish tabl lenght ${FamilleTable.length}`);
+        }
+
+    } catch (err) {
+        alert(err.toString());
+        return;
+    }
+}

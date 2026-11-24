@@ -72,7 +72,7 @@ a {
     background-color: lightgrey;
     position: absolute;
     border: 0.2rem solid grey;
-    border-radius: 2.5rem;
+    border-radius: 1.7rem;
     font-size: 1.5rem;
     width: fit-content;
     justify-self: center;
@@ -82,7 +82,7 @@ a {
 }
 
 .SousFamille {
-    display: none;
+    display: flex;
     background-color: var(--DefaultLight);
     border: 0.2rem solid var(--Default);
     border-radius: 1.5rem;
@@ -155,6 +155,12 @@ a {
     place-items: center;
 }
 
+.Loged.info {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+}
+
 .LogInGrid {
     min-height: 80vh;
     display: grid;
@@ -198,4 +204,5 @@ a {
 
 #Family {
     font-size: 1.4rem;
+    display: block;
 }
