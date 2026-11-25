@@ -5,7 +5,7 @@ const Family = document.getElementById("Family");
 const SearchElement = document.getElementById("Search");
 const SearchBar = document.getElementById("SearchBar");
 
-const BlocsListe = document.querySelectorAll(".block");
+var BlocsListe;
 var UnFam;
 
 const MaListe = document.getElementById("MaListe");
@@ -275,7 +275,7 @@ async function FindMembre() {
 
             MemberTable.forEach((bloc) => {
                 if (bloc != UserName) {
-                    const htmlMembre = `<Section href="" class="block">
+                    const htmlMembre = `<Section class="block" id="${bloc}" style="cursor: pointer">
                                             <div>
                                                 <h3>${bloc}</h3>
                                                 <div class="tags-liste">
@@ -287,7 +287,24 @@ async function FindMembre() {
 
                     MemberListe.insertAdjacentHTML("beforeend", htmlMembre);
                 }
+            })
+            BlocsListe = document.querySelectorAll(".block");
 
+            BlocsListe.forEach((bloc) => {
+                try {
+                    bloc.addEventListener("click", () => {
+                        const LocalChange = {
+                            Nom: UserName,
+                            Fam: FamilyName,
+                            Targ: bloc.id,
+                        };
+                        localStorage.setItem(SessionKey, JSON.stringify(LocalChange));
+                        window.location.replace("GiftList.html");
+                    })
+                } catch (err) {
+                    alert(err);
+                    return;
+                }
             })
         }
 
