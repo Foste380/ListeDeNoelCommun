@@ -204,7 +204,7 @@ async function FindGift() {
                 //alert("Setup set");
 
                 //CONTENT
-                const htmlGift = `<Section class="block  FlexMain" style="align-items: start">
+                const htmlGift = `<Section id="${MainGiftTitle}" class="block  FlexMain" style="align-items: start">
                                 <div style="width: 100%;">
                                     <h3>${MainGiftTitle}</h3>
                                     <div class="tags-liste">
