@@ -98,7 +98,7 @@ async function FindGift() {
                 }
                 var GiftDepContent = "";
                 if (GiftDep != "Aucune Dépense") {
-                    GiftDepContent = `<nav class="tag" style="display: flex;">
+                    GiftDepContent = `<nav class="tag">
                                         <a href="#${GiftDep}">Dépend de ${GiftDep}</a>
                                     </nav>`;
                 }
@@ -208,11 +208,11 @@ async function FindGift() {
                                 <div style="width: 100%;">
                                     <h3>${MainGiftTitle}</h3>
                                     <div class="tags-liste">
-                                        <div class="Flex">
+                                        <div class="FlexSpec">
                                             <p class="tag ${GiftPrioHiden}" style="background-color: var(--${GiftPrioColor})">${GiftPrio}</p>
                                             <p class="tag" style="background-color: var(${TagPriceColor})">${TagPriceOrder}</p>    
                                         </div>
-                                        <div class="Flex">
+                                        <div class="FlexSpec">
                                             ${GiftDepContent}
                                             <p class="tag">${GiftCat}</p>
                                         </div>

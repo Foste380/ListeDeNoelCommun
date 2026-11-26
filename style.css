@@ -300,6 +300,10 @@ a {
     margin: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
+.FlexSpec {
+    display: flex;
+}
+
 /* id */
 #Search {
     border: 0;
@@ -313,12 +317,39 @@ a {
     display: block;
 }
 
-@media (max-width: 800px) {
-
-    .FlexMain,
+@media (max-width: 935px) {
     .tags-liste {
         display: block;
     }
+}
 
+@media (max-width: 800px) {
 
+    .FlexMain {
+        display: block;
+    }
+
+    .tags-liste {
+        display: flex;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .tags-liste {
+        display: block;
+    }
+}
+
+@media (max-width: 460px) {
+    .FlexSpec {
+        display: block;
+    }
+
+    .tags-liste .tag:last-child,
+    .tags-liste .tag:first-child,
+    .tags-liste .tag:only-child {
+        border-radius: 1rem;
+        text-align: center;
+    }
 }
