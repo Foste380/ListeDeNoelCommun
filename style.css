@@ -237,6 +237,7 @@ a {
     margin: 0;
     padding: 0.1rem 0.2rem;
     width: 100%;
+    align-self: center;
 }
 
 .ScrollBar {
@@ -270,6 +271,7 @@ a {
     border-radius: 1rem;
     background-color: var(--Assombri);
     padding: 0.1rem 0.2rem;
+    align-self: center;
 }
 
 .PartPrix {

@@ -170,7 +170,7 @@ async function FindGift() {
                                 const GiftPartcipNewContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
                                                             <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus">
                                                             <p class="PartRef">${UnderBlocParticip}</p>
-                                                            <p class="PartPrix">${UnderBlocPrix} €</p>
+                                                            <p class="PartPrix">${UnderBlocPrix}€</p>
                                                         </div>`
 
                                 GiftPartcipContentSelf = GiftPartcipNewContent;
@@ -178,7 +178,7 @@ async function FindGift() {
                             else {
                                 const GiftPartcipNewContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
                                                             <p class="PartRef">${UnderBlocParticip}</p>
-                                                            <p class="PartPrix">${UnderBlocPrix} €</p>
+                                                            <p class="PartPrix">${UnderBlocPrix}€</p>
                                                         </div>`
 
                                 GiftPartcipContent = GiftPartcipContent + GiftPartcipNewContent
