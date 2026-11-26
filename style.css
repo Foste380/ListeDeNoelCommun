@@ -3,8 +3,15 @@
     --DefaultNeg: red;
     --DefaultLight: lightgreen;
     --DefaultNegLight: rgb(240, 156, 156);
-    --Assombri: RGBA(1, 1, 1, 0.2);
-    --SemiDark: RGBA(1, 1, 1, 0.5);
+    --Assombri: RGBA(0, 0, 0, 0.2);
+    --Danger: RGBA(255, 50, 50, 0.7);
+    --Mid: RGBA(255, 122, 0, 0.7);
+    --Low: RGBA(255, 255, 0, 0.5);
+    --Chip: RGBA(0, 255, 255, 0.5);
+    --MidPrice: RGBA(0, 122, 255, 0.5);
+    --Chere: RGBA(122, 50, 255, 0.5);
+    --SemiDark: RGBA(0, 0, 0, 0.5);
+    --DefaultClaire: rgb(0, 255, 0);
     --persoBlue: #00b3ff;
 
 }
@@ -279,7 +286,7 @@ a {
 .BtnPlus {
     width: 2rem;
     height: 2rem;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
 /* id */
