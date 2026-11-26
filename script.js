@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     if (Family) {
-        if (FamSet) {
+        if (FamSet && IsLog) {
             Family.textContent = FamilyName;
             if (MaListe) {
                 MaListe.classList.toggle("Hide", false);
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 SearchBar.classList.toggle("Hide", true);
             }
             if (NoFamMess) {
-                NoFamMess.classList.toggle("Hide", false);
+                NoFamMess.classList.toggle("Hide", !IsLog);
             }
         }
 

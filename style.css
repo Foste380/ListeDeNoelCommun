@@ -210,7 +210,7 @@ a {
 
 .Flex {
     display: flex;
-    align-items: center;
+    align-items: centerF;
 }
 
 .Boolean {
