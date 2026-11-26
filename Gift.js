@@ -204,14 +204,18 @@ async function FindGift() {
                 //alert("Setup set");
 
                 //CONTENT
-                const htmlGift = `<Section class="block  Flex" style="align-items: start">
+                const htmlGift = `<Section class="block  FlexMain" style="align-items: start">
                                 <div style="width: 100%;">
                                     <h3>${MainGiftTitle}</h3>
                                     <div class="tags-liste">
-                                        <p class="tag ${GiftPrioHiden}" style="background-color: var(--${GiftPrioColor})">${GiftPrio}</p>
-                                        <p class="tag" style="background-color: var(${TagPriceColor})">${TagPriceOrder}</p>                                   
-                                        ${GiftDepContent}
-                                        <p class="tag">${GiftCat}</p>
+                                        <div class="Flex">
+                                            <p class="tag ${GiftPrioHiden}" style="background-color: var(--${GiftPrioColor})">${GiftPrio}</p>
+                                            <p class="tag" style="background-color: var(${TagPriceColor})">${TagPriceOrder}</p>    
+                                        </div>
+                                        <div class="Flex">
+                                            ${GiftDepContent}
+                                            <p class="tag">${GiftCat}</p>
+                                        </div>
                                     </div>
                                     <p class="Description">${GiftDesc}</p>
                                     ${GiftRefContent}
