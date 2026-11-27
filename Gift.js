@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
             GTarget = ActualSession.Targ
         }
 
+
+
         if (GiftTitle) {
             GiftTitle.textContent = `Liste de ${GTarget} chez ${GFamilyName}`;
         }
-
-        //alert(GUserName + " " + GFamilyName + " " + GTarget)
 
         FindGift();
     }
@@ -45,6 +45,7 @@ async function FindGift() {
 
     try {
         if (SpecGiftNameListe) {
+            GiftListe.innerHTML = "";
             SpecGiftNameListe.forEach((bloc) => {
 
                 //SETUP
@@ -153,38 +154,42 @@ async function FindGift() {
 
                 var GiftPartcipContent = "";
                 var GiftPartcipContentSelf = `<div class="Flex" style="margin-bottom: 0.5rem;">
-                                                            <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus">
-                                                            <p style="font-weight: bold">Participer</P>
+                                                            <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus" id="btn${MainGiftTitle}">
+                                                            <input type="number" id="Prix${MainGiftTitle}" class="PartPrix Unset" Placeholder="Participer" >
                                                         </div>`
                 if (GiftParticipList) {
                     const GiftParticipListCharge = GiftParticipList.split(",").map(Nom => Nom.trim());
+
+
+
                     if (GiftParticipListCharge) {
                         GiftParticipListCharge.forEach((UnderBloc) => {
-                            const UnderBlocList = UnderBloc.split("::").map(Nom => Nom.trim());
+                            if (UnderBloc != "" && UnderBloc != null) {
+                                const UnderBlocList = UnderBloc.split("::").map(Nom => Nom.trim());
 
-                            const UnderBlocParticip = UnderBlocList[0];
-                            const UnderBlocPrix = UnderBlocList[1];
+                                const UnderBlocParticip = UnderBlocList[0];
+                                const UnderBlocPrix = UnderBlocList[1];
 
+                                if (UnderBlocParticip == UserName) {
+                                    GiftPartcipNewSelfContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
+                                                            <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus" id="btn${MainGiftTitle}">
+                                                            <p class="PartRef">Votre Participation</p>
+                                                            <input type="number" id="Prix${MainGiftTitle}" class="PartPrix Unset" Placeholder="${UnderBlocPrix}€">
+                                                        </div>`
 
-                            if (UnderBlocParticip == UserName) {
-                                const GiftPartcipNewContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
-                                                            <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus">
+                                    GiftPartcipContentSelf = GiftPartcipNewSelfContent;
+                                }
+                                else {
+                                    const GiftPartcipNewContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
                                                             <p class="PartRef">${UnderBlocParticip}</p>
                                                             <p class="PartPrix">${UnderBlocPrix}€</p>
                                                         </div>`
 
-                                GiftPartcipContentSelf = GiftPartcipNewContent;
-                            }
-                            else {
-                                const GiftPartcipNewContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
-                                                            <p class="PartRef">${UnderBlocParticip}</p>
-                                                            <p class="PartPrix">${UnderBlocPrix}€</p>
-                                                        </div>`
+                                    GiftPartcipContent = GiftPartcipContent + GiftPartcipNewContent
+                                }
 
-                                GiftPartcipContent = GiftPartcipContent + GiftPartcipNewContent
+                                GiftPrixCharge += Number(UnderBlocPrix) || 0;
                             }
-
-                            GiftPrixCharge += Number(UnderBlocPrix) || 0;
                         })
                     }
                 }
@@ -219,6 +224,13 @@ async function FindGift() {
                                     </div>
                                     <p class="Description">${GiftDesc}</p>
                                     ${GiftRefContent}
+                                    <div class="Flex" style="margin-bottom: 0.5rem;">
+                                        <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus" id="LinkBtn${MainGiftTitle}">
+                                        <div>
+                                            <input type="text" id="NewLinkTitle${MainGiftTitle}" class="Ref Unset" Placeholder="Intuler du nouveau lien" >
+                                            <input type="text" id="NewLinkContent${MainGiftTitle}" class="Ref Unset" Placeholder="Ajouté un lien" >
+                                        </div>
+                                    </div>
                                 </div>
                                 <div style="width: 100%;">
                                     <div class="Flex">
@@ -239,10 +251,172 @@ async function FindGift() {
                             </Section>`
                 //alert("Gift created");
                 GiftListe.insertAdjacentHTML("beforeend", htmlGift);
+
+                //Add Particip
+                const BtnAddPart = document.getElementById(`btn${MainGiftTitle}`);
+                if (!BtnAddPart) {
+                    alert("bouton Add Participiannt not found");
+                    return
+                }
+                const PrixAddInput = document.getElementById(`Prix${MainGiftTitle}`);
+
+                try {
+                    BtnAddPart.addEventListener("click", () => {
+                        if (PrixAddInput) {
+                            NewPrice(PrixAddInput, MainGiftTitle);
+                        }
+                        else {
+                            alert("text not found")
+                        }
+                    })
+                } catch (error) {
+                    alert(err);
+                }
+
+                //Add Link
+                const BtnAddLink = document.getElementById(`LinkBtn${MainGiftTitle}`);
+                if (!BtnAddLink) {
+                    alert("bouton Add Participiannt not found");
+                    return
+                }
+                const TitleLinkAddInput = document.getElementById(`NewLinkTitle${MainGiftTitle}`);
+                const LinkAddInput = document.getElementById(`NewLinkContent${MainGiftTitle}`);
+
+                try {
+                    BtnAddLink.addEventListener("click", () => {
+                        if (TitleLinkAddInput && LinkAddInput) {
+                            NewLink(TitleLinkAddInput, LinkAddInput, MainGiftTitle);
+                        }
+                        else {
+                            alert("text or link not found")
+                        }
+                    })
+                } catch (error) {
+                    alert(err);
+                }
+
+
             });
         }
     } catch (err) {
         alert(err);
         return;
+    }
+}
+
+async function NewPrice(params, params1) {
+    const Price = params.value;
+
+    const respond = await fetch(`${URLDataBase}?Page=GiftList`);
+    const Data = await respond.json();
+
+    const SpecGiftName = Data.filter(f => (f.Nom == GTarget) && ((f.Famille == GFamilyName) && (f.Title == params1)));
+
+    if (SpecGiftName) {
+
+        const ActualElement = SpecGiftName[0].Participant;
+
+        var Participant;
+
+        var TextToSend = "";
+        if (ActualElement) {
+            Participant = ActualElement.split(",").map(Nom => Nom.trim());
+            Participant.forEach((bloc) => {
+                const blocSep = bloc.split("::").map(Nom => Nom.trim());
+
+                if (blocSep[0] != GUserName) {
+                    TextToSend = TextToSend + bloc + ",";
+                }
+            })
+        }
+        if (Price > 0 && Price != "" && Price != null) {
+            const TextToAdd = GUserName + "::" + Price;
+            TextToSend = TextToSend + TextToAdd;
+        }
+
+        //alert("text : " + TextToSend);
+
+        const Send = await fetch(URLDataBase, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify({
+                Action: "NewPrice",
+                Nom: GTarget,
+                Famille: GFamilyName,
+                Titre: params1,
+                Particip: TextToSend
+            })
+        })
+
+        const SendRespond = await Send.text();
+        //alert(SendRespond);
+
+        FindGift();
+    }
+}
+
+async function NewLink(params, paramsBis, params1) {
+    var TitleToAdd = params.value;
+    const LinkToAdd = paramsBis.value;
+
+    const respond = await fetch(`${URLDataBase}?Page=GiftList`);
+    const Data = await respond.json();
+
+    const SpecGiftName = Data.filter(f => (f.Nom == GTarget) && ((f.Famille == GFamilyName) && (f.Title == params1)));
+
+    if (SpecGiftName) {
+
+        const ActualElement = SpecGiftName[0].Ref;
+
+        var Participant;
+
+
+        var TextToSend = "";
+        if (ActualElement) {
+            Participant = ActualElement.split(",").map(Nom => Nom.trim());
+            Participant.forEach((bloc) => {
+                const blocSep = bloc.split("::").map(Nom => Nom.trim());
+
+                if (blocSep[1] != LinkToAdd) {
+                    TextToSend = TextToSend + bloc + ",";
+                }
+            })
+        }
+
+        if (LinkToAdd != "" && LinkToAdd != null) {
+            if (!TitleToAdd || TitleToAdd == "") {
+                TitleToAdd = "Sans Nom";
+                alert(`Nouveau nom : ${TitleToAdd}`)
+            }
+            const TextToAdd = TitleToAdd + "::" + LinkToAdd + "::false";
+            TextToSend = TextToSend + TextToAdd;
+        }
+        else {
+            alert("lien manquant");
+            return;
+        }
+
+        alert("text : " + TextToSend);
+
+        const Send = await fetch(URLDataBase, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify({
+                Action: "NewLink",
+                Nom: GTarget,
+                Famille: GFamilyName,
+                Titre: params1,
+                Link: TextToSend
+            })
+        })
+
+        const SendRespond = await Send.text();
+        alert(SendRespond);
+
+        FindGift();
     }
 }
