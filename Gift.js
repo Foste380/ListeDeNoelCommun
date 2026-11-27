@@ -173,7 +173,7 @@ async function FindGift() {
                                 if (UnderBlocParticip == UserName) {
                                     GiftPartcipNewSelfContent = `<div class="Flex" style="margin-bottom: 0.5rem;">
                                                             <img src="Image/Placeholder/Placeholder scare.png" class="BtnPlus" id="btn${MainGiftTitle}">
-                                                            <p class="PartRef">Votre Participation</p>
+                                                            <p class="PartRef">Participation</p>
                                                             <input type="number" id="Prix${MainGiftTitle}" class="PartPrix Unset" Placeholder="${UnderBlocPrix}€">
                                                         </div>`
 

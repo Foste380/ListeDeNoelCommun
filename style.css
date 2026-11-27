@@ -298,7 +298,7 @@ a {
 .PartPrix {
     font-weight: bold;
     margin-left: 0.5rem;
-    width: 15%;
+    width: 25%;
     border: 0.1rem solid var(--SemiDark);
     border-radius: 1rem;
     background-color: var(--Assombri);
