@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         if (GiftTitle) {
-            GiftTitle.textContent = `Liste de ${GTarget} chez ${GFamilyName}`;
+            GiftTitle.textContent = `${GTarget} (${GFamilyName})`;
         }
 
         FindGift();
